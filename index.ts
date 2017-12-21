@@ -2,7 +2,7 @@ import * as fs from "fs"
 import * as dns from "dns"
 
 const INPUT_FILE = "./domains.txt";
-const OUTPUT_FILE = "hosts.txt";
+const OUTPUT_FILE = "./hosts.txt";
 
 function resolve4Promise(domain: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -28,7 +28,7 @@ function resolve4Promise(domain: string): Promise<string> {
         if (domain.length == 0) continue;
         try {
             var ip = await resolve4Promise(domain);
-            console.error(`${domain}: ${ip}`);
+            console.log(`${domain}: ${ip}`);
             fs.appendFileSync(OUTPUT_FILE, `${ip} ${domain}\r\n`);
         } catch (error) {
             console.error(`${domain}: ${error.message}`);
